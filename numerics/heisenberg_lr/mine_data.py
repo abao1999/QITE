@@ -2,7 +2,7 @@ import numpy as np
 import os,subprocess
 import sys
 import matplotlib.pyplot as plt
-sys.path.append('/home/mmotta/QITE/imag_time_for_qcomp/code_v4/')
+sys.path.append('../../code_v4/')
 import style as st
 
 def qite_plot(RR,TT,EE,FF,FCI,xrng,yrng,fname):

@@ -44,7 +44,7 @@ if __name__ == "__main__":
   for n0 in range(b**nbit):
    assert(n0==Bas2Int(Int2Bas(n0,b,nbit),b))
    if(nbit==4):
-    print n0,Int2Bas(n0,b,nbit)
+    print(n0,Int2Bas(n0,b,nbit))
   t1 = time.time()
   dt = t1-t0
   v.append(dt)

@@ -36,11 +36,11 @@ def print_Hamiltonian(H_):
  mu = 0
  for (A,h,imp,gmp) in H_:
   nact = len(A)
-  print "term ",mu
-  print "active qubits ",A
-  print "operators: "
+  print("term ", mu)
+  print("active qubits ", A)
+  print("operators: ")
   for m in np.where(np.abs(h)>1e-8)[0]:
-   print Opp2Str(Int2Bas(m,4,nact)),h[m]
+   print(Opp2Str(Int2Bas(m,4,nact)),h[m])
   mu += 1
 
 def Hii(H_,i):
@@ -85,12 +85,12 @@ def Heisenberg_LR(nspin,R):
  H = []
  for i in range(nspin):
   for j in range(i+1,nspin):
-   print i,j
+   print(i,j)
    # -----
    active = [k for k in range(nspin) if dobc(i,k,nspin)<R or dobc(j,k,nspin)<R]
    active = np.asarray(active)
    nact   = len(active)      
-   print active
+   print(active)
    # -----
    h_alpha = np.zeros(4**nact)
    ii = np.where(active==i)[0][0]
@@ -181,22 +181,22 @@ def Hubbard(norb,R,U):
 
  # ----- potential energy
  for i in range(norb-1):
-  print ">>>>>>> sites ",i,i+1
-  print "neighborhood"
+  print(">>>>>>> sites ",i,i+1)
+  print("neighborhood")
   dij   = np.asarray([min(np.abs(i-j),np.abs(i+1-j)) for j in range(norb)])
   idx   = np.where(dij<R)[0]
-  print idx
+  print(idx)
   pmin  = 2*min(idx)
   pmax  = 2*max(idx)+1
   act   = range(pmin,pmax+1)
   nact  = len(act)
-  print act
+  print(act)
 
-  print "-----"
+  print("-----")
   h_alpha = np.zeros(4**nact)
   for k in (i,i+1):  
    pk = 2*k-pmin
-   print "interaction on site ",k
+   print("interaction on site ", k)
    wk = 0.5
 
    #idx     = [0]*nact
@@ -204,28 +204,28 @@ def Hubbard(norb,R,U):
 
    if(k==0 or k==norb-1): wk = 1.0
  
-   print "indices",pk,pk+1,nact,wk
+   print("indices",pk,pk+1,nact,wk)
    # -----
    idx     = [0]*nact
    idx[pk] = 3
-   print idx
+   print(idx)
    h_alpha[Bas2Int(idx,4)] = -U*wk/4.0+(U/2)*wk/2.0 # half-filling Hubbard
    # -----
    idx       = [0]*nact
    idx[pk+1] = 3
-   print idx
+   print(idx)
    h_alpha[Bas2Int(idx,4)] = -U*wk/4.0+(U/2)*wk/2.0 # half-filling Hubbard
    # -----
    idx       = [0]*nact
    idx[pk]   = 3
    idx[pk+1] = 3
-   print idx
+   print(idx)
    h_alpha[Bas2Int(idx,4)] =  U*wk/4.0
    # -----
 
-  print "kinetic"
+  print("kinetic")
   for sigma in (0,1):
-   print "spin ",sigma
+   print("spin ", sigma)
    p = (2*i+sigma)-pmin
    q = p+2
    # -----
@@ -233,20 +233,20 @@ def Hubbard(norb,R,U):
    idx[p]   = 1
    idx[p+1] = 3
    idx[q]   = 1
-   print idx
+   print(idx)
    h_alpha[Bas2Int(idx,4)] = -0.5
    # -----
    idx      = [0]*nact
    idx[p]   = 2
    idx[p+1] = 3
    idx[q]   = 2
-   print idx
+   print(idx)
    h_alpha[Bas2Int(idx,4)] = -0.5
 
   imap,gmap = pauli_action(act,nspin)
   H.append((act,h_alpha,imap,gmap))
 
-  print "remember to add the constant correction ",U*norb/4.0-(U/2)*2*norb/2.0
+  print("remember to add the constant correction ",U*norb/4.0-(U/2)*2*norb/2.0)
 
  return H
 
