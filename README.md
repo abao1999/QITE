@@ -1,3 +1,9 @@
+# Quantum Imaginary Time Evolution (QITE) for the Fermi-Hubbard Model
+
+The jupyter notebooks with the most current implementations are in the notebooks directory
+
+The QPU implementation of 1-qubit QITE is in QPU_implementation
+
 The source (code_v4) is organized in several python files
 
 binary_functions.py functions to convert a string of n integers modulo 2 into an integer between 0 and 2**n-1 and viceversa, eg 101 = 5 
