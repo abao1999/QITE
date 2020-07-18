@@ -1,4 +1,4 @@
-# Quantum Imaginary Time Evolution (QITE) for the Fermi-Hubbard Model
+# Quantum Imaginary Time Evolution (QITE) for the Hubbard Model
 
 The jupyter notebooks with the most current implementations are in the notebooks directory
 
