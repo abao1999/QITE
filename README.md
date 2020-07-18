@@ -6,7 +6,7 @@ The QPU implementation of 1-qubit QITE is in QPU_implementation
 
 The source (code_v4) is organized in several python files
 
-binary_functions.py functions to convert a string of n integers modulo 2 into an integer between 0 and 2**n-1 and viceversa, eg 101 = 5 
+binary_functions.py functions to convert a string of n integers modulo 2 into an integer between 0 and $2^{n-1}$ and viceversa, eg 101 = 5 
 pauli.py            functions to deal with the algebra of Pauli operators, written as integer strings modulo 4, eg 3102 = ZXIY, and to apply a Pauli operator to an element of the computational basis
 hamiltonian.py      defines the Hamiltonians we studied in the QITE paper, the Heisenberg short-range, Maxcut etc, as linear combinations of Pauli operators; 
                     contains functions to apply H to a wavefunction, construct the matrix associated to the Hamiltonian in the computational basis, 
