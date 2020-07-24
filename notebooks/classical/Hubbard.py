@@ -6,7 +6,7 @@ from Pmn import PPmunu
 
 t_hubbard = 1
 U_hubbard = 2
-beta = 1.0
+beta = 1.5
 sigma = np.zeros([2, 2, 4], dtype=complex)
 sigma[0, 0, 0] = 1.
 sigma[1, 1, 0] = 1.
@@ -16,7 +16,7 @@ sigma[0, 1, 2] = -1j
 sigma[1, 0, 2] = 1j
 sigma[0, 0, 3] = 1.
 sigma[1, 1, 3] = -1.
-N = 10 # Number of imaginary time steps
+N = 15 # Number of imaginary time steps
 
 # Defining the Hamiltonian
 Hamiltonian = -t_hubbard * (np.kron(sigma[:, :, 1], sigma[:, :, 0]) + np.kron(sigma[:, :, 0], sigma[:, :, 1])) \
@@ -85,7 +85,7 @@ phi = psi
 e = np.matmul(Hamiltonian, phi)
 e = np.real(np.matmul(np.transpose(np.conj(phi)), e))
 energy_qite_list.append(e)
-
+alist = []
 print('We start QITE now')
 for i in range(0,N):
 
@@ -120,11 +120,12 @@ for i in range(0,N):
 		b[i] -= (U_hubbard / 2) * coeff[i, 0] * Pmu_expectation[index[i, 0]] / c
 		b[i] -= (U_hubbard / 2) * coeff[i, 15] * Pmu_expectation[index[i, 15]] / c
 		b[i] = 1j * b[i] - 1j * np.conj(b[i])
+		#print(i, b[i])
 
 	# Obtain x 
 	dalpha = np.eye(16) * 0.01
 	x = np.linalg.lstsq(S + np.transpose(S) + dalpha, -b, rcond=-1)[0]
-
+	alist.append(x)
 	# Classical evolution
 	U = np.eye(4)
 	for i in range(len(x)):
@@ -134,7 +135,10 @@ for i in range(0,N):
 	phi = np.matmul(U, phi)
 	e = np.matmul(Hamiltonian, phi)
 	e = np.real(np.matmul(np.transpose(np.conj(phi)), e))
+	print(e)
 	energy_qite_list.append(e)
+for item in alist:
+	print(item)
 print('Final energy from QITE is ', e)
 
 plt.figure()
